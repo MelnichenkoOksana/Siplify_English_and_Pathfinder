@@ -33,34 +33,33 @@ public class ChangeText {
 
 //    Вспомогательный метод который собирает итоговую строку с учетом регистра и знаков припинания.
     public static String resultStringBuilder(String text, ArrayList<String> arrayWords) {
-        char [] arrayChars= text.toCharArray();
-        StringBuilder resultString= new StringBuilder();
-        while (arrayWords.size()>1) {
-            for (int i = 0; i < arrayChars.length; i++) {
-                if (!Character.isAlphabetic(arrayChars[i])) {
-                    resultString.append(arrayChars[i]);
-                } else if ((arrayChars[i] >= 65) && (arrayChars[i] <= 90)&&(arrayWords.size()>0)) {
+        char [] arrayChars= text.toCharArray(); // разбиваем изночальный текст на эементы (массив элементов)
+        StringBuilder resultString= new StringBuilder();// создаем стринбилдер для хранения итогового результата
 
-                    char[] tempArrayChar = arrayWords.get(0).toCharArray();
-                    arrayWords.remove(0);
-                    tempArrayChar[0] = Character.toUpperCase(tempArrayChar[0]);
+            for (int i = 0; i < arrayChars.length; i++) { // прооходимся по массиву элементов изночальной строки
+                if (!Character.isAlphabetic(arrayChars[i])) { // если элемент - не буква
+                    resultString.append(arrayChars[i]); // добавляем ее в итоговую строу
+                } else if ((arrayChars[i] >= 65) && (arrayChars[i] <= 90)&&(arrayWords.size()>0)) { //ИНАЧЕ (если буква и она БОЛЬШАЯ и в массиве слов есть еще слова)
+                    char[] tempArrayChar = arrayWords.get(0).toCharArray(); // брем первое слово из массива слов и разбиваем его на символы (во временный масив символов)
+                    arrayWords.remove(0);  // удаляем это слово из массива
+                    tempArrayChar[0] = Character.toUpperCase(tempArrayChar[0]); //Поднимаем регистр первой буквы слова
+                    // По буквам дообавляем измененное слово (с большой буквы) в итоговую строку
                     for (int j = 0; j < tempArrayChar.length; j++) {
                         resultString.append(tempArrayChar[j]);
                     }
-                    while ((Character.isAlphabetic(arrayChars[i + 1]))&&(arrayWords.size()>1)) {
+                //пока изначальном тексте идут буквы пропускаем их.
+                    while ((Character.isAlphabetic(arrayChars[i + 1]))&&(i<(arrayChars.length-1))) {
                         i++;
                     }
-                } else {
-                    if (arrayWords.size()>0) {
-                        resultString.append(arrayWords.get(0));
-                        arrayWords.remove(0);
-                    }
-                    while ((i <= (arrayChars.length - 2)) && (Character.isAlphabetic(arrayChars[i + 1]))&&(arrayWords.size()>1)) {
+                } else {// ИНАЧЕ (если буква маленькая)
+                     resultString.append(arrayWords.get(0));
+                     arrayWords.remove(0);
+                     while ((i <= (arrayChars.length - 2)) && (Character.isAlphabetic(arrayChars[i + 1]))&&(i<(arrayChars.length-1))) {
                         i += 1;
                     }
                 }
             }
-        }
+
 //        System.out.println("итоговая строка: "+ resultString);
         return resultString.toString();
 
