@@ -1,39 +1,25 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static java.lang.Character.toUpperCase;
-
 public class ChangeText {
-    private String text;
 
-    public String getText() {
-        return text;
-    }
-
-    public ChangeText(String text) {
-        this.text = text;
-    }
-
-    public ChangeText() {
-    }
-
-    //    Вспомогательный метод который из строки создает массив слов приведенных к нижнему региистру
+    //    Вспомогательный метод который из строки создает массив слов приведенных к нижнему регистру
     public static ArrayList<String> arrayWorldsBuilder(String text) {
         String tempText = text.toLowerCase(Locale.ROOT).replaceAll("[.:;?,!-]", " ");
         String[] tempArrayWords;
-        tempArrayWords = tempText.split("\\s+");// в массив срок разбиваеем басню на слова (по пробелам)
-        ArrayList<String> arrayWords = new ArrayList<String>();
+        tempArrayWords = tempText.split("\\s+");// в массив срок разбиваем текст на слова (по пробелам)
+        ArrayList<String> arrayWords = new ArrayList<>();
         for (String s :
                 tempArrayWords) {
             arrayWords.add(s);
         }
-//        System.out.println("Массив слов: "+arrayWords);
         return arrayWords;
     }
 
-    //    Вспомогательный метод который собирает итоговую строку с учетом регистра и знаков припинания.
+    //    Вспомогательный метод который собирает итоговую строку с учетом регистра и знаков препинания.
     public static String resultStringBuilder(String text, ArrayList<String> arrayWords) {
-        char[] arrayChars = text.toCharArray(); // разбиваем изночальный текст на эементы (массив элементов)
+        char[] arrayChars = text.toCharArray(); // разбиваем изначальный текст на массив элементов
         StringBuilder resultString = new StringBuilder();// создаем стрингбилдер для хранения итогового результата
 
         for (int i = 0; i < arrayChars.length; i++) { // прооходимся по массиву элементов изночальной строки
@@ -60,12 +46,10 @@ public class ChangeText {
             }
         }
 
-//        System.out.println("итоговая строка: "+ resultString);
         return resultString.toString();
-
     }
 
-    public static String deleteС(String text) {
+    public static ArrayList<String> deleteС(String text) {
         ArrayList<String> arrayWorlds = arrayWorldsBuilder(text);
         ArrayList<String> resultArrayWorlds = new ArrayList<>();
 
@@ -102,18 +86,16 @@ public class ChangeText {
                 }
             }
             resultArrayWorlds.add(changedWord);
-//                System.out.println(resultArrayWorlds);
         }
-//            System.out.println("массив слов после изменения (удаления с): "+ resultArrayWorlds);
-        String resultText = resultStringBuilder(text, resultArrayWorlds);
-        return resultText;
+
+        return resultArrayWorlds;
     }
 
-    public static String deleteDoubleLetter(String text) {
-        ArrayList<String> arrayWorlds = arrayWorldsBuilder(text);
+    public static ArrayList<String> deleteDoubleLetter(ArrayList<String> arrayWords) {
+
         ArrayList<String> resultArrayWorlds = new ArrayList<>();
         for (String word :
-                arrayWorlds) {
+                arrayWords) {
             char[] tempArrayChar = word.toCharArray();
             int i = 0;
             if (word.length()>1) {
@@ -145,20 +127,15 @@ public class ChangeText {
                 }
             }
             resultArrayWorlds.add(changedWord);
-//                System.out.println(resultArrayWorlds);
         }
-        System.out.println("массив слов после изменения (удаления двойных букв): " + resultArrayWorlds);
-
-        String resultText = resultStringBuilder(text, resultArrayWorlds);
-
-        return resultText;
+        return resultArrayWorlds;
     }
 
-    public static String deleteEAtEndWord(String text) {
-        ArrayList<String> arrayWorlds = arrayWorldsBuilder(text);
+    public static String deleteEAtEndWord(ArrayList<String> arrayWords) throws IOException {
+
         ArrayList<String> resultArrayWorlds = new ArrayList<>();
         for (String word :
-                arrayWorlds) {
+                arrayWords) {
             char[] tempArrayChar = word.toCharArray();
             if (tempArrayChar[tempArrayChar.length - 1] == 'e') {
                 tempArrayChar[tempArrayChar.length - 1] = '0';
@@ -171,11 +148,9 @@ public class ChangeText {
                 }
             }
             resultArrayWorlds.add(changedWord);
-//                System.out.println(resultArrayWorlds);
         }
-        System.out.println("массив слов после удаления е: " + resultArrayWorlds);
 
-        String resultText = resultStringBuilder(text, resultArrayWorlds);
+        String resultText = resultStringBuilder(InputOutput.getInfoFromFile(), resultArrayWorlds);
 
         return resultText;
     }
@@ -189,6 +164,5 @@ public class ChangeText {
         text = text.replace(" th "," ");
 
         return text;
-
     }
 }
