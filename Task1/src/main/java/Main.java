@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-String text = "Ssuccess,a cc,an ciceckc, jjjj, the";
+String text = "Ssuccess, a cc, an ciceckc, jjjj, the";
 ChangeText ChangeMyText = new ChangeText(text);
 text = ChangeText.deleteС(text);
         System.out.println(text);

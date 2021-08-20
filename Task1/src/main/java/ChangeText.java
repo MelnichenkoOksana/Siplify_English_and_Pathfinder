@@ -116,25 +116,27 @@ public class ChangeText {
                 arrayWorlds) {
             char[] tempArrayChar = word.toCharArray();
             int i = 0;
-            do {
-                if (tempArrayChar[i] == tempArrayChar[i + 1]) {
-                    switch (tempArrayChar[i]) {
-                        case 'e':
-                            tempArrayChar[i] = '0';
-                            tempArrayChar[i + 1] = 'i';
-                            break;
-                        case 'o':
-                            tempArrayChar[i] = '0';
-                            tempArrayChar[i + 1] = 'u';
-                            break;
-                        default:
-                            tempArrayChar[i] = '0';
-                            break;
-                    }
+            if (word.length()>1) {
+                do {
+                    if (tempArrayChar[i] == tempArrayChar[i + 1]) {
+                        switch (tempArrayChar[i]) {
+                            case 'e':
+                                tempArrayChar[i] = '0';
+                                tempArrayChar[i + 1] = 'i';
+                                break;
+                            case 'o':
+                                tempArrayChar[i] = '0';
+                                tempArrayChar[i + 1] = 'u';
+                                break;
+                            default:
+                                tempArrayChar[i] = '0';
+                                break;
+                        }
 
-                }
-                i++;
-            } while (i < (tempArrayChar.length - 1));
+                    }
+                    i++;
+                } while (i < (tempArrayChar.length - 1));
+            }
             String changedWord = "";
             for (char ch :
                     tempArrayChar) {
@@ -189,11 +191,11 @@ public class ChangeText {
             System.out.println(tempArrayListWords);
         }
         for (int i = 0; i < tempArrayListWords.size(); i++) {
-                if ((tempArrayListWords.get(i).equals("A")) &&
-                        (tempArrayListWords.get(i).equals("a")) &&
-                        (tempArrayListWords.get(i).equals("An")) &&
-                        (tempArrayListWords.get(i).equals("an")) &&
-                        (tempArrayListWords.get(i).equals("th")) &&
+                if ((tempArrayListWords.get(i).equals("A")) ||
+                        (tempArrayListWords.get(i).equals("a")) ||
+                        (tempArrayListWords.get(i).equals("An")) ||
+                        (tempArrayListWords.get(i).equals("an")) ||
+                        (tempArrayListWords.get(i).equals("th")) ||
                         (tempArrayListWords.get(i).equals("Th"))) {
                 tempArrayListWords.remove(i);
                 i--;
@@ -201,7 +203,7 @@ public class ChangeText {
         }
         for (String word :
                 tempArrayListWords) {
-            resultString.append(word);
+            resultString.append(э word);
         }
 
         return resultString.toString();
