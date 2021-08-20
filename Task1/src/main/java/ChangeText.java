@@ -180,33 +180,15 @@ public class ChangeText {
         return resultText;
     }
 
-    public static String deleteArticles(String text) {
-        String[] tempArrayWords;
-        ArrayList<String> tempArrayListWords = new ArrayList<>();
-        StringBuilder resultString = new StringBuilder();
-        tempArrayWords = text.split("\\s+");// в массив срок разбиваеем басню на слова (по пробелам)
-        for (String word :
-                tempArrayWords) {
-            tempArrayListWords.add(word);
-            System.out.println(tempArrayListWords);
-        }
-        for (int i = 0; i < tempArrayListWords.size(); i++) {
-                if ((tempArrayListWords.get(i).equals("A")) ||
-                        (tempArrayListWords.get(i).equals("a")) ||
-                        (tempArrayListWords.get(i).equals("An")) ||
-                        (tempArrayListWords.get(i).equals("an")) ||
-                        (tempArrayListWords.get(i).equals("th")) ||
-                        (tempArrayListWords.get(i).equals("Th"))) {
-                tempArrayListWords.remove(i);
-                i--;
-            }
-        }
-        for (String word :
-                tempArrayListWords) {
-            resultString.append(э word);
-        }
+    public static String deleteArticles(String text){
+        text = text.replace(" A "," ");
+        text = text.replace(" a "," ");
+        text = text.replace(" An "," ");
+        text = text.replace(" an "," ");
+        text = text.replace(" Th "," ");
+        text = text.replace(" th "," ");
 
-        return resultString.toString();
+        return text;
+
     }
-
 }
