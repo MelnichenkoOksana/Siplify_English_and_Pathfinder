@@ -137,7 +137,7 @@ public class ChangeText {
         for (String word :
                 arrayWords) {
             char[] tempArrayChar = word.toCharArray();
-            if (tempArrayChar[tempArrayChar.length - 1] == 'e') {
+            if ((tempArrayChar[tempArrayChar.length - 1] == 'e')&&(tempArrayChar.length > 1)) {
                 tempArrayChar[tempArrayChar.length - 1] = '0';
             }
             String changedWord = "";
