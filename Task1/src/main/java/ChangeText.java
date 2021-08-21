@@ -194,6 +194,6 @@ public class ChangeText {
             resultString.append(word+" ");
         }
 
-        return resultString.toString();
+        return resultString.toString().trim();
     }
 }
