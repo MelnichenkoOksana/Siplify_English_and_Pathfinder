@@ -1,5 +1,5 @@
 # Выполнено в рамках тестового задания.
-> ## Задача 1
+ ## Задача 1
 > ### Условие:  Implement an algorithm that simplifies the English text.
 > #### 1) Remove "c" from the text
 > If the text contains “ci” and “ce”, change it to “si” and “se”.
