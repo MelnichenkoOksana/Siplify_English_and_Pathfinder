@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class InputOutput {
@@ -15,40 +14,37 @@ public class InputOutput {
         return sb.toString();
     }
 
-    public static ArrayList<char[][]> conversionStringAnArray(String incomingString){
+    public static char[][][] conversionStringAnArray(String incomingString){
         incomingString = incomingString.toLowerCase(Locale.ROOT).replaceAll("\\s+",""); // удаляем из строки все пробелы и невидимые строку
-        ArrayList<char[][]> labyrinthMap =new ArrayList<>();
+
         char[] tempCharArray = incomingString.toCharArray(); //разбиваем строку на массив символов
         int numberFloors = Character.getNumericValue(tempCharArray[0]);//кол-во этажей
         int length = Character.getNumericValue(tempCharArray[1]); //длина этажа
         int width = Character.getNumericValue(tempCharArray[2]); //ширина этажа
+        char[][][] labyrinthMap =new char[numberFloors][length][width];
 
-
+        int counterFloors = 0;
         for (int i = 3; i < tempCharArray.length; i++) {
-            char [][] floor = new char[length][width];
-            int counterSquare = 0;
-            int counterLength = 0;
-            int counterWidth = 0;
-            while (counterSquare<((length*width))){
+
+            while (counterFloors<numberFloors){
+                int counterLength = 0;
+                int counterWidth = 0;
                 while (counterLength<length){
                     while (counterWidth<width){
-                        floor[counterLength][counterWidth]=tempCharArray[i];
+                        labyrinthMap[counterFloors][counterLength][counterWidth]=tempCharArray[i];
                         counterWidth++;
-                        counterSquare++;
                         i++;
                     }
                     counterLength++;
                     counterWidth =0;
                 }
-                labyrinthMap.add(floor);
-                i--;
+                counterFloors++;
+//                i--;
             }
         }
 
-        for (char[][] f:
-             labyrinthMap) {
-            System.out.println(f);
-        }
+            System.out.println(labyrinthMap);
+
         return labyrinthMap;
     }
 

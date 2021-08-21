@@ -27,7 +27,7 @@ public class Main {
                 "o..\n" +
                 "\n" +
                 "o.2";
-var result = InputOutput.conversionStringAnArray(InputOutput.getInfoFromFile());
+ InputOutput.conversionStringAnArray(InputOutput.getInfoFromFile());
     }
 
 }
