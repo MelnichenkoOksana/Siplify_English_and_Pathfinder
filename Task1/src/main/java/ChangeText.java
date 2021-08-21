@@ -155,14 +155,45 @@ public class ChangeText {
         return resultText;
     }
 
-    public static String deleteArticles(String text){
-        text = text.replace(" A "," ");
-        text = text.replace(" a "," ");
-        text = text.replace(" An "," ");
-        text = text.replace(" an "," ");
-        text = text.replace(" Th "," ");
-        text = text.replace(" th "," ");
+    public static String deleteArticles(String changeText) throws IOException {
+        String startText = InputOutput.getInfoFromFile();
+        String[] tempArrayStartWords;
+        String [] tempArrayChangeWords;
+        ArrayList<String> arrayStartWords = new ArrayList<>();
+        ArrayList<String> arrayChangeWords = new ArrayList<>();
 
-        return text;
+        tempArrayStartWords = startText.split("\\s+");// в массив срок разбиваем текст на слова (по пробелам)
+        tempArrayChangeWords = changeText.split("\\s+");// в массив срок разбиваем текст на слова (по пробелам)
+        for (String s :
+                tempArrayStartWords) {
+            arrayStartWords.add(s);
+        }
+        for (String s :
+                tempArrayChangeWords) {
+            arrayChangeWords.add(s);
+        }
+        ArrayList<Integer> arrayIndex = new ArrayList<>();
+
+        for (int i = 0; i < arrayStartWords.size(); i++) {
+
+                if (arrayStartWords.get(i).replaceAll("[.:;?,!-]", " ").equalsIgnoreCase("a")||
+                        arrayStartWords.get(i).replaceAll("[.:;?,!-]", " ").equalsIgnoreCase("the")||
+                        arrayStartWords.get(i).replaceAll("[.:;?,!-]", " ").equalsIgnoreCase("an")) {
+                arrayIndex.add(i);
+            }
+        }
+
+        for (int i = (arrayIndex.size()-1); i >=0 ; i--) {
+            int index = arrayIndex.get(i);
+            arrayChangeWords.remove(index);
+        }
+
+        StringBuilder resultString = new StringBuilder();
+        for (String word:
+             arrayChangeWords) {
+            resultString.append(word+" ");
+        }
+
+        return resultString.toString();
     }
 }
