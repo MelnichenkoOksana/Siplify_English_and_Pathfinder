@@ -50,8 +50,8 @@
 
 ### Особенности реализации: 
 - При разработке были использованы следующие внутренние библиотеки java:
- +  java.io.IOException;
- +  java.util.ArrayList;
- +  java.util.Locale;
+> java.io.IOException;
+> java.util.ArrayList;
+> java.util.Locale;
 - Все действия выполняются последовательно в одном потоке.
 - Каждый пункт условия реализован в отдельном методе.
