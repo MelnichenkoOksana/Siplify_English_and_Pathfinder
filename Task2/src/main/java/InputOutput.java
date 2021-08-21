@@ -23,11 +23,12 @@ public class InputOutput {
         int length = Character.getNumericValue(tempCharArray[1]); //длина этажа
         int width = Character.getNumericValue(tempCharArray[2]); //ширина этажа
 
-        int counterSquare = 0;
-        int counterLength = 0;
-        int counterWidth = 0;
+
         for (int i = 3; i < tempCharArray.length; i++) {
             char [][] floor = new char[length][width];
+            int counterSquare = 0;
+            int counterLength = 0;
+            int counterWidth = 0;
             while (counterSquare<((length*width))){
                 while (counterLength<length){
                     while (counterWidth<width){
@@ -40,7 +41,7 @@ public class InputOutput {
                     counterWidth =0;
                 }
                 labyrinthMap.add(floor);
-                counterSquare = 0;
+                i--;
             }
         }
 
