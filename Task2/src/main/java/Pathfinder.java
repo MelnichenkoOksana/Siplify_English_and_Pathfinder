@@ -13,6 +13,8 @@ class Point {
     }
 
 }
+
+
 class PathNode extends Point {
     public Point goal;
     public Point position;
@@ -69,8 +71,8 @@ class newSolution {
     public static char[][][] matrix;
     public static void main(String[] args) throws IOException{
         matrix = InputOutput.conversionStringAnArray(InputOutput.getInfoFromFile());
-        Point start = new Point(0,0, 0); // НАПИСАТЬ МЕТОД СЧИТЫВАНИЯ КООРДИНАТ ПРИНЦА И ПРИНЦЕССЫ
-        Point goal = new Point(10, 10,10); // НАПИСАТЬ МЕТОД СЧИТЫВАНИЯ КООРДИНАТ ПРИНЦА И ПРИНЦЕССЫ
+        Point start = InputOutput.searchDesiredPoint(matrix, '1'); // координаты принца
+        Point goal =  InputOutput.searchDesiredPoint(matrix, '2');// координаты принцессы
         ArrayList<Point> list = FindPath(start,goal);
 
         for (Point point : list)
@@ -130,7 +132,7 @@ class newSolution {
 
         for(Point point : neighbourPoints)
             {
-            if (point.Z < 0 || point.X >= matrix.length)
+            if (point.Z < 0 || point.Z >= matrix.length)
                 continue;
             if (point.X < 0 || point.X >= matrix[0].length)
                 continue;

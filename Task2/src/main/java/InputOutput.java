@@ -48,10 +48,25 @@ public class InputOutput {
         return labyrinthMap;
     }
 
+public static Point searchDesiredPoint (char [][][] labyrinthMap, char a){
+    Point desiredPoint = null;
+    for (int i = 0; i < labyrinthMap.length; i++) {
+        for (int j = 0; j < labyrinthMap[0].length; j++) {
+            for (int k = 0; k < labyrinthMap[0][0].length; k++) {
+                if (labyrinthMap[i][j][k]==a){
+                    desiredPoint = new Point(i,j,k);
+                }
+            }
+        }
+    }
+
+    return desiredPoint;
+}
+
     public static boolean writeFile(String filename, String resultText){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(filename)))
         {
-            bw.write(resultText);
+            bw.write(newSolution.minLength(newSolution.GetPath(newSolution.getInList())));
         }
         catch(IOException ex){
             System.out.println(ex.getMessage());
